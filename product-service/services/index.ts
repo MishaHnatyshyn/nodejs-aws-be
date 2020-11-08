@@ -1,3 +1,3 @@
-import BookService from './book/book.service'
+import { BookService } from './book/book.service'
 
 export { BookService }

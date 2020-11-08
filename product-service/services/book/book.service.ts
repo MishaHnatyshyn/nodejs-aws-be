@@ -1,21 +1,22 @@
-import BOOKS from '../../data/Books';
-import { Book } from '../../types/book.interface';
 import BookNotFoundError from './bookNotFound.error';
+import BookRepository from '../../repositories/book.repository';
+import Book from '../../models/book.model';
 
 export class BookService {
-  constructor(private books: Book[]) {}
+  constructor(
+    private bookRepository: BookRepository,
+  ) {}
 
-  getOneById(id: string): Book {
-    const targetBook = this.books.find(book => book.id === id);
+  async getOneById(id: string): Promise<Book> {
+    const targetBook = await this.bookRepository.getById(id)
+
     if (!targetBook) {
       throw new BookNotFoundError(id);
     }
     return targetBook;
   }
 
-  getAll(): Book[] {
-    return this.books;
+  async getAll(): Promise<Book[]> {
+    return this.bookRepository.getAll()
   }
 }
-
-export default new BookService(BOOKS);

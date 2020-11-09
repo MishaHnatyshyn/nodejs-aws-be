@@ -5,16 +5,18 @@ import {
   formDefaultServerErrorResponse
 } from '../utils/response';
 import { HttpResponseStatus } from '../types/HttpResponseStatus.enum';
-import Book from '../models/book.model';
 import {getBookService} from '../services/utils';
+import BookWithCount from '../models/bookWithCount.model';
 
 
 const getProductsList: APIGatewayProxyHandler = async () => {
+  console.log('New request to getProductsList lambda')
+
   try {
     const bookService = await getBookService()
 
     const books = await bookService.getAll();
-    const body = formSuccessResponseBody<Book[]>(books);
+    const body = formSuccessResponseBody<BookWithCount[]>(books);
 
     return formResponse(HttpResponseStatus.OK, body)
   } catch (e) {

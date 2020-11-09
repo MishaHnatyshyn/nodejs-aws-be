@@ -6,9 +6,10 @@ export const formSuccessResponseBody = <T>(data: T) => ({
   data
 })
 
-export const formFailureResponseBody = (message: string) => ({
+export const formFailureResponseBody = (message: string, errors: any[]) => ({
   status: 'FAILURE',
-  message
+  message,
+  errors,
 })
 
 export const formResponse = (status: HttpResponseStatus, body, headers = {}): APIGatewayProxyResult => ({
@@ -22,7 +23,7 @@ export const formResponse = (status: HttpResponseStatus, body, headers = {}): AP
 })
 
 export const formDefaultServerErrorResponse = (): APIGatewayProxyResult => {
-  const errorBody = formFailureResponseBody('Something went wrong :(');
+  const errorBody = formFailureResponseBody('Something went wrong :(', []);
 
   return formResponse(HttpResponseStatus.SERVER_ERROR, errorBody)
 }

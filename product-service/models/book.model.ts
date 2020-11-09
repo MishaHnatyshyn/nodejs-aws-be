@@ -1,8 +1,7 @@
 export default class Book {
-  count: number
-  description: string
-  id: string
-  price: number
-  title: string
-  image_url: string
+  readonly description: string
+  readonly id: string
+  readonly price: number
+  readonly title: string
+  readonly image_url: string
 }

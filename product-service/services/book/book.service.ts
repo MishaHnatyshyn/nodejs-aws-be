@@ -1,21 +1,32 @@
-import BOOKS from '../../data/Books';
-import { Book } from '../../types/book.interface';
 import BookNotFoundError from './bookNotFound.error';
+import BookRepository from '../../repositories/book.repository';
+import {ProductDto} from '../../types/product.dto';
+import BookWithCount from '../../models/bookWithCount.model';
+import FailedToCreateBookError from './failedToCreateBook.error';
 
 export class BookService {
-  constructor(private books: Book[]) {}
+  constructor(
+    private bookRepository: BookRepository,
+  ) {}
 
-  getOneById(id: string): Book {
-    const targetBook = this.books.find(book => book.id === id);
+  async getOneById(id: string): Promise<BookWithCount> {
+    const targetBook = await this.bookRepository.getById(id)
+
     if (!targetBook) {
       throw new BookNotFoundError(id);
     }
     return targetBook;
   }
 
-  getAll(): Book[] {
-    return this.books;
+  async getAll(): Promise<BookWithCount[]> {
+    return this.bookRepository.getAll()
+  }
+
+  async create(data: ProductDto): Promise<BookWithCount> {
+    const book = await this.bookRepository.createBookWithStock(data)
+    if (!book) {
+      throw new FailedToCreateBookError()
+    }
+    return book
   }
 }
-
-export default new BookService(BOOKS);

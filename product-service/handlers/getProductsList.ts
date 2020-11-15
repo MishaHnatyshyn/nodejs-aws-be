@@ -1,17 +1,22 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
-import { Book} from '../types/book.interface';
 import {
   formResponse,
   formSuccessResponseBody,
   formDefaultServerErrorResponse
 } from '../utils/response';
 import { HttpResponseStatus } from '../types/HttpResponseStatus.enum';
-import { BookService } from '../services';
+import {getBookService} from '../services/utils';
+import BookWithCount from '../models/bookWithCount.model';
+
 
 const getProductsList: APIGatewayProxyHandler = async () => {
+  console.log('New request to getProductsList lambda')
+
   try {
-    const books = BookService.getAll();
-    const body = formSuccessResponseBody<Book[]>(books);
+    const bookService = await getBookService()
+
+    const books = await bookService.getAll();
+    const body = formSuccessResponseBody<BookWithCount[]>(books);
 
     return formResponse(HttpResponseStatus.OK, body)
   } catch (e) {

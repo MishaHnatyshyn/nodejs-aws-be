@@ -23,6 +23,7 @@ const serverlessConfiguration: Serverless = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+      PRODUCTS_BUCKET_NAME: 'nodejs-aws-import-service-bucket'
     },
     iamRoleStatements: [
       {
@@ -53,6 +54,24 @@ const serverlessConfiguration: Serverless = {
                 }
               }
             }
+          }
+        }
+      ]
+    },
+    importFileParser: {
+      handler: 'index.importFileParser',
+      events: [
+        {
+          s3: {
+            event: 's3:ObjectCreated:*',
+            bucket: 'nodejs-aws-import-service-bucket',
+            rules: [
+              {
+                prefix: 'uploaded/',
+                suffix: ''
+              }
+            ],
+            existing: true
           }
         }
       ]

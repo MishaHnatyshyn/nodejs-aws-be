@@ -3,8 +3,8 @@ import {
   formResponse,
   formSuccessResponseBody,
   formDefaultServerErrorResponse, formFailureResponseBody
-} from '../utils/response';
-import { HttpResponseStatus } from '../types/HttpResponseStatus.enum';
+} from '../../shared/utils/response';
+import { HttpResponseStatus } from '../../shared/types/HttpResponseStatus.enum';
 import Book from '../models/book.model';
 import {getBookService} from '../services/utils';
 import {ProductDto} from '../types/product.dto';

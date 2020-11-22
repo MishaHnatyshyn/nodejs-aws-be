@@ -37,7 +37,7 @@ export default class ImportService {
   }
 
   public parseNewFiles(keys: string[]): Promise<void[]> {
-    return Promise.all(keys.map(async (key) => {
+    return Promise.all(keys.map((key) => {
       const s3Stream = this.storageService.get(this.BUCKET_NAME, key);
       return this.parseCsvFile(s3Stream, key);
     }))

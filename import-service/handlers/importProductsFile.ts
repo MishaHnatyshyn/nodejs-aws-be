@@ -10,13 +10,13 @@ import {getImportService} from '../services/utils';
 
 
 const importProductsFile: APIGatewayProxyHandler = async (event) => {
-  const { name: filename } = event.queryStringParameters;
+  const filename = event?.queryStringParameters?.name
 
   if (!filename) {
     const errorBody = formFailureResponseBody('Query Parameter "name" is required', [])
     return formResponse(HttpResponseStatus.BAD_REQUEST, errorBody);
   }
-  
+
   try {
     const importService = getImportService();
     const url = await importService.getSignedUrlForProductsUpload(filename);

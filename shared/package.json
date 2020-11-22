@@ -1,0 +1,9 @@
+{
+  "name": "shared-service",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.17",
+    "@types/node": "^10.12.18"
+  },
+  "license": "MIT"
+}

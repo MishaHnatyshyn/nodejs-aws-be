@@ -4,8 +4,8 @@ import {
   formFailureResponseBody,
   formResponse,
   formSuccessResponseBody
-} from '../utils/response';
-import { HttpResponseStatus } from '../types/HttpResponseStatus.enum';
+} from '../../shared/utils/response';
+import { HttpResponseStatus } from '../../shared/types/HttpResponseStatus.enum';
 import BookNotFoundError from '../services/book/bookNotFound.error';
 import BookWithCount from '../models/bookWithCount.model';
 import {getBookService} from '../services/utils';

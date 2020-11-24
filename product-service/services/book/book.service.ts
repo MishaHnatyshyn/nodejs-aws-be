@@ -29,4 +29,8 @@ export class BookService {
     }
     return book
   }
+
+  async createMany(data: ProductDto[]): Promise<BookWithCount[]> {
+    return Promise.all(data.map(book => this.bookRepository.createBookWithStock(book)))
+  }
 }

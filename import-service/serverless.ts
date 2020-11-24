@@ -20,7 +20,8 @@ const serverlessConfiguration: Serverless = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-      PRODUCTS_BUCKET_NAME: 'nodejs-aws-import-service-bucket'
+      PRODUCTS_BUCKET_NAME: 'nodejs-aws-import-service-bucket',
+      SQS_URL: 'https://sqs.us-east-1.amazonaws.com/866013640144/catalogItemsQueueRssNodeAws',
     },
     iamRoleStatements: [
       {
@@ -32,6 +33,11 @@ const serverlessConfiguration: Serverless = {
         Effect: 'Allow',
         Action: 's3:*',
         Resource: 'arn:aws:s3:::nodejs-aws-import-service-bucket/*'
+      },
+      {
+        Effect: 'Allow',
+        Action: 'sqs:*',
+        Resource: 'arn:aws:sqs:us-east-1:866013640144:catalogItemsQueueRssNodeAws'
       }
     ]
   },

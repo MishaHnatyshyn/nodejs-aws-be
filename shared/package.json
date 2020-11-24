@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "devDependencies": {
     "@types/aws-lambda": "^8.10.17",
-    "@types/node": "^10.12.18"
+    "@types/node": "^10.12.18",
+    "@types/joi": "^14.3.4",
+    "joi": "^17.3.0"
   },
   "license": "MIT"
 }

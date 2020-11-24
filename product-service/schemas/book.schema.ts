@@ -1,6 +1,6 @@
 import * as Joi from 'joi';
 import {ProductDto} from '../types/product.dto';
-import {createValidatorFunction} from '../utils/validation';
+import {createValidatorFunction} from '../../shared/utils/validation';
 
 const productSchema = Joi.object({
   title: Joi.string().not().empty().required(),

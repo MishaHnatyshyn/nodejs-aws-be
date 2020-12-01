@@ -39,7 +39,37 @@ const serverlessConfiguration: Serverless = {
         Action: 'sqs:*',
         Resource: 'arn:aws:sqs:us-east-1:866013640144:catalogItemsQueueRssNodeAws'
       }
-    ]
+    ],
+  },
+  resources: {
+    Resources: {
+      GatewayResponseDenied: {
+        Type: 'AWS::ApiGateway::GatewayResponse',
+        Properties: {
+          ResponseParameters: {
+            'gatewayresponse.header.Access-Control-Allow-Origin': "'*'",
+            'gatewayresponse.header.Access-Control-Allow-Credentials': "'true'",
+          },
+          ResponseType: 'ACCESS_DENIED',
+          RestApiId: {
+            Ref: 'ApiGatewayRestApi',
+          },
+        }
+      },
+      GatewayResponseUnauthorized: {
+        Type: 'AWS::ApiGateway::GatewayResponse',
+        Properties: {
+          ResponseParameters: {
+            'gatewayresponse.header.Access-Control-Allow-Origin': "'*'",
+            'gatewayresponse.header.Access-Control-Allow-Credentials': "'true'",
+          },
+          ResponseType: 'UNAUTHORIZED',
+          RestApiId: {
+            Ref: 'ApiGatewayRestApi',
+          },
+        }
+      }
+    }
   },
   functions: {
     importProductsFile: {
@@ -56,6 +86,13 @@ const serverlessConfiguration: Serverless = {
                   name: true
                 }
               }
+            },
+            authorizer: {
+              name: 'basicAuthorizer',
+              arn: 'arn:aws:lambda:us-east-1:866013640144:function:authorization-service-dev-basicAuthorizer',
+              resultTtlInSeconds: 0,
+              identitySource: 'method.request.header.Authorization',
+              type: 'token'
             }
           }
         }

@@ -18,6 +18,7 @@ export const formResponse = (status: HttpResponseStatus, body, headers = {}): AP
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Credentials': true,
+    'Access-Control-Allow-Headers': '*',
     ...headers
   },
 })

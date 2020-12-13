@@ -1,0 +1,22 @@
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+
+# Webpack directories
+.webpack
+
+# Enviroment variables
+.env
+
+# Build directory
+dist
+
+# Eleasticbeanstalk
+.ebextensions
+.elasticbeanstalk
+
+# Editor
+.idea
